@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Atlas Acadêmico de Química — Lucas",
+  title: "LucasChemistry — Atlas Acadêmico",
   description: "Graduação, pós-graduação e pesquisa organizadas em uma rota científica pessoal.",
   other: {
     "codex-preview": "development",

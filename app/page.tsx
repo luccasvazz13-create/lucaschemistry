@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { ChemistryLab, Gradebook, IraBadge } from "./chemistry-lab";
 
 type CourseStatus = "Concluída" | "Cursando" | "Planejada" | "Dispensada";
 type Discipline = {
@@ -369,7 +370,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="Navegação principal">
         <a className="brand" href="#inicio" aria-label="Atlas Acadêmico, início"><span className="brand-mark">Q</span><span>ATLAS ACADÊMICO</span></a>
-        <div className="nav-meta"><span className="private-pill"><i /> ACESSO PRIVADO</span><a href="#matriz">Grade + horas</a><a href="#aceleracao">Plano acelerado</a><a href="#rota">Minha rota</a></div>
+        <div className="nav-meta"><span className="private-pill"><i /> ACESSO PRIVADO</span><a href="#matriz">Grade + horas</a><a href="#aceleracao">Plano acelerado</a><a href="#laboratorio">Laboratório</a><a href="#rota">Minha rota</a></div>
       </nav>
 
       <section className="hero" id="inicio">
@@ -378,7 +379,7 @@ export default function Home() {
           <h1>O futuro começa<br /><em>no laboratório do presente.</em></h1>
           <p className="hero-lead">Da graduação em Química à Farmacologia: cada aula, pesquisa e escolha transforma potência em realidade.</p>
         </div>
-        <div className="atom" aria-hidden="true"><div className="orbit orbit-a"><span /></div><div className="orbit orbit-b"><span /></div><div className="orbit orbit-c"><span /></div><div className="nucleus"><small>LUCAS</small><strong>CROWLEY VAZ</strong></div><div className="flask flask-a"><i /></div><div className="flask flask-b"><i /></div><div className="test-tubes"><i /><i /><i /></div></div>
+        <div className="atom"><div className="orbit orbit-a" aria-hidden="true"><span /></div><div className="orbit orbit-b" aria-hidden="true"><span /></div><div className="orbit orbit-c" aria-hidden="true"><span /></div><div className="nucleus"><small>LUCAS</small><strong>CROWLEY VAZ</strong><IraBadge /></div><div className="flask flask-a" aria-hidden="true"><i /></div><div className="flask flask-b" aria-hidden="true"><i /></div><div className="test-tubes" aria-hidden="true"><i /><i /><i /></div></div>
       </section>
 
       <section className="dashboard" aria-labelledby="painel-title">
@@ -536,13 +537,16 @@ export default function Home() {
               {unscheduledCourses.length > 0 && <div className="unscheduled-strip"><strong>Sem horário definido ainda</strong><span>{unscheduledCourses.join(" · ")}</span></div>}
               {weekendEntries.length > 0 && <div className="weekend-strip"><strong>Fora da grade Seg–Sex</strong><span>{weekendEntries.map((entry) => `${entry.courseName}: sábado ${entry.start}–${entry.end}`).join(" · ")}</span></div>}
             </div>
+            <Gradebook terms={accelerationPlan.map(({ term, courses }) => ({ term, courses }))} />
           </section>
           <div className="critical-path"><span>Caminho crítico</span><p>Cálculo II → Equações Diferenciais → Fenômeno de Transporte → Operações Unitárias I → Operações Unitárias II → Estágio I → Estágio II</p></div>
         </div>
       </section>
 
+      <ChemistryLab />
+
       <section className="route" id="rota" aria-labelledby="rota-title">
-        <div className="section-heading inverse"><div><p className="kicker"><span>03</span> ROTA DE SÍNTESE</p><h2 id="rota-title">Química → Farmacologia → Docência.</h2></div><p>Selecione uma etapa para abrir o foco estratégico.</p></div>
+        <div className="section-heading inverse"><div><p className="kicker"><span>04</span> ROTA DE SÍNTESE</p><h2 id="rota-title">Química → Farmacologia → Docência.</h2></div><p>Selecione uma etapa para abrir o foco estratégico.</p></div>
         <div className="roadmap-tabs" role="tablist" aria-label="Etapas da formação">
           {roadmap.map((stage, index) => <button key={stage.title} className={activeRoadmap === index ? "active" : ""} onClick={() => setActiveRoadmap(index)} role="tab" aria-selected={activeRoadmap === index}><span>{stage.date}</span>{stage.title}</button>)}
         </div>
